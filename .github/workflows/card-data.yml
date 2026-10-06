@@ -1,0 +1,69 @@
+name: Card data
+
+on:
+  schedule:
+    - cron: '17 6 * * *'        # every morning (UTC)
+  workflow_dispatch:
+    inputs:
+      full:
+        description: 'Rebuild the card catalogues too (not just prices)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: card-data
+  cancel-in-progress: false
+
+jobs:
+  data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Previous data
+        run: |
+          mkdir -p out
+          if git fetch --depth 1 origin data 2>/dev/null; then
+            git show origin/data:games.json > out/games.json || true
+          fi
+
+      - name: Catalogues (Mondays, first run, or when asked)
+        id: full
+        env:
+          FULL: ${{ github.event.inputs.full }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$FULL" = "true" ] || [ "$(date -u +%u)" = "1" ] || [ ! -s out/games.json ]; then
+            TAG="catalog-$(date -u +%Y%m%d)"
+            node tools/build_games.js --out out --db-url "https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG}"
+            gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
+            gh release create "$TAG" out/*.db --title "Card catalogues $(date -u +%Y-%m-%d)" --notes "Built from tcgcsv.com by the Card data workflow."
+            # Keep the four newest catalogue releases.
+            gh release list --limit 50 --json tagName --jq '.[].tagName' | grep '^catalog-' | sort -r | tail -n +5 | while read t; do gh release delete "$t" --yes --cleanup-tag; done
+            echo "built=yes" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Prices
+        if: steps.full.outputs.built != 'yes'
+        run: node tools/build_games.js --out out --prices-only
+
+      - name: Publish the data branch (one commit, replaced each run)
+        run: |
+          cd out
+          rm -f *.db
+          git init -q -b data
+          git config user.name "card-data bot"
+          git config user.email "card-data@users.noreply.github.com"
+          git add .
+          git commit -q -m "Card data $(date -u +%Y-%m-%d)"
+          git push -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data:data
+        env:
+          GH_TOKEN: ${{ github.token }}
