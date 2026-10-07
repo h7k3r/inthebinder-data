@@ -1,0 +1,94 @@
+{
+  "format": 1,
+  "games": {
+    "op": {
+      "built_at": "2026-10-07T00:46:35.315Z",
+      "bin": {
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/op-vision.bin",
+        "bytes": 3474432,
+        "sha256": "0ef4b4f3a55cbf2851808df7e9219e77f8c25d0c95addeb0ab712a5e098c2a30"
+      },
+      "scale": {
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/op-vision.scale",
+        "bytes": 27144,
+        "sha256": "a5d562e837dbf6a79a4599a50a1eb799182297b42cfdfb6155a3b1d13127c57f"
+      },
+      "ids": {
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/op-vision.ids.json",
+        "bytes": 81433,
+        "sha256": "eeda9b8f33702477a5f2463905c71ff32370c3bc6ce643c8dbfe09be1d2483e9"
+      },
+      "count": 6786,
+      "eval": {
+        "game": "op",
+        "cards": 6786,
+        "tested": 600,
+        "top1_exact": 0.8967,
+        "top1_same_card": 0.94,
+        "top5": 0.9983,
+        "pokemon_would_win": 0,
+        "median_top_score": 0.921
+      }
+    },
+    "lorcana": {
+      "built_at": "2026-10-07T00:46:35.324Z",
+      "bin": {
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/lorcana-vision.bin",
+        "bytes": 1839616,
+        "sha256": "35d8476ebc07b369fbaf8cf76aad0a47cd25df19976fd79a389fd0f77d4ac72b"
+      },
+      "scale": {
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/lorcana-vision.scale",
+        "bytes": 14372,
+        "sha256": "d5992aca5d03653be4152d8cd476cca0d90f1ecf3d2a2860f6501d89a3d97fe5"
+      },
+      "ids": {
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/lorcana-vision.ids.json",
+        "bytes": 61082,
+        "sha256": "9d5ca4fdf50e3daef4ced08efcca6208997bbc509df4c1b491a8ebeab1188c0a"
+      },
+      "count": 3593,
+      "eval": {
+        "game": "lorcana",
+        "cards": 3593,
+        "tested": 600,
+        "top1_exact": 0.9733,
+        "top1_same_card": 0.9767,
+        "top5": 1,
+        "pokemon_would_win": 0,
+        "median_top_score": 0.921
+      }
+    },
+    "dbsfw": {
+      "built_at": "2026-10-07T00:46:35.330Z",
+      "bin": {
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/dbsfw-vision.bin",
+        "bytes": 2186240,
+        "sha256": "eed8b5c08ef67b0c20906e0c19c00980bf6a16c67a4c6f522cb28eae899bf568"
+      },
+      "scale": {
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/dbsfw-vision.scale",
+        "bytes": 17080,
+        "sha256": "3b76d88862972d55411958c9a7148c374fadeb5230f45498f5e86cb0de6b9225"
+      },
+      "ids": {
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/dbsfw-vision.ids.json",
+        "bytes": 64051,
+        "sha256": "2ba7ed21503d13538aa1abd4ec1c4ce65bbaf0538d746902e9dd8b9870e23e0e"
+      },
+      "count": 4270,
+      "eval": {
+        "game": "dbsfw",
+        "cards": 4270,
+        "tested": 600,
+        "top1_exact": 0.9683,
+        "top1_same_card": 1,
+        "top5": 1,
+        "pokemon_would_win": 0,
+        "median_top_score": 0.927
+      }
+    }
+  },
+  "embedder_sha": "bcf1b9fc23a2",
+  "dim": 512
+}
