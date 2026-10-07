@@ -87,6 +87,35 @@
         "pokemon_would_win": 0,
         "median_top_score": 0.927
       }
+    },
+    "ygo": {
+      "built_at": "2026-10-07T13:07:44.185Z",
+      "bin": {
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/ygo-vision.bin",
+        "bytes": 22963712,
+        "sha256": "09bc449fd1a36c794c33af71b7a2ba719ccc128c52e9c4132ff4eeb1a2bc6ecf"
+      },
+      "scale": {
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/ygo-vision.scale",
+        "bytes": 179404,
+        "sha256": "40f3920a9c500308659953594dfc17ce15c48aa6f743fa9f8b9c4895201c4c78"
+      },
+      "ids": {
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/ygo-vision.ids.json",
+        "bytes": 565947,
+        "sha256": "5a79f7f5f708b4ca3b502e9a8166fcf676eabcf734d2f7bcfa9f47ba05d7be26"
+      },
+      "count": 44851,
+      "eval": {
+        "game": "ygo",
+        "cards": 44851,
+        "tested": 600,
+        "top1_exact": 0.96,
+        "top1_same_card": 0.9667,
+        "top5": 0.9967,
+        "pokemon_would_win": 0,
+        "median_top_score": 0.92
+      }
     }
   },
   "embedder_sha": "bcf1b9fc23a2",
