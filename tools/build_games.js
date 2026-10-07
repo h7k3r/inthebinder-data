@@ -10,6 +10,9 @@
  *   <out>/<game>.db          SQLite: meta, sets, cards, slots, sealed
  *   <out>/<game>-prices.json { day, currency: 'USD', prices: { "<productId>|<variant>": market } }
  *   <out>/games.json         what each catalogue holds (counts, sizes, sha256, built_at)
+ *   <out>/<game>-web.json    the same catalogue as compact JSON for the web version
+ *                            (inthebinder.com/app loads it only when a backup has that game)
+ *   --web-from-db            only (re)write <game>-web.json from <out>/<game>.db already there
  *
  * IDS (stable: TCGplayer product ids never change):
  *   set  'op~24736'      card 'op~712666'      slot 'op~712666::normal'
@@ -43,6 +46,7 @@ const args = process.argv.slice(2);
 const outArg = args.indexOf('--out');
 const OUT = path.resolve(ROOT, outArg >= 0 ? args[outArg + 1] : 'games');
 const PRICES_ONLY = args.includes('--prices-only');
+const WEB_FROM_DB = args.includes('--web-from-db');
 // Where the .db files will be downloadable from (the GitHub release the
 // workflow creates), written into games.json for the app.
 const urlArg = args.indexOf('--db-url');
@@ -217,17 +221,45 @@ async function buildGame(key) {
     VACUUM;
   `);
   db.close();
+  const web = writeWebJson(key, dbPath);
   const buf = fs.readFileSync(dbPath);
   const pbuf = fs.readFileSync(priceFile);
   return {
     key, name: g.name, built_at: builtAt, sets: sets.length, cards: cards.length, slots: slots.length, sealed: sealed.length,
     db: { file: `${key}.db`, bytes: buf.length, sha256: sha(buf), url: DB_URL ? `${DB_URL}/${key}.db` : null },
     prices: { file: `${key}-prices.json`, bytes: pbuf.length, day, count: Object.keys(prices).length },
+    web,
     seconds: Math.round((Date.now() - t0) / 1000),
   };
 }
 
+/** <game>-web.json from a built catalogue: columns once, rows as arrays (no SQLite in the browser). */
+function writeWebJson(key, dbPath) {
+  const db = new DatabaseSync(dbPath, { readOnly: true });
+  const q = (sql) => db.prepare(sql).all().map((r) => Object.values(r));
+  const out = {
+    v: 1,
+    game: key,
+    built: new Date().toISOString(),
+    sets: { cols: ['id', 'name', 'code', 'release_date', 'card_count'], rows: q(`SELECT id, name, code, release_date, card_count FROM sets ORDER BY release_date DESC, name`) },
+    cards: { cols: ['id', 'set_id', 'number', 'name', 'rarity', 'product_id', 'printing'], rows: q(`SELECT id, set_id, number, name, COALESCE(rarity, ''), product_id, COALESCE(printing, '') FROM cards`) },
+    slots: { cols: ['card_id', 'variant', 'label'], rows: q(`SELECT card_id, variant, variant_label FROM slots ORDER BY set_id, sort_key`) },
+  };
+  db.close();
+  const file = path.join(OUT, `${key}-web.json`);
+  fs.writeFileSync(file, JSON.stringify(out));
+  return { file: `${key}-web.json`, bytes: fs.statSync(file).size };
+}
+
 (async () => {
+  if (WEB_FROM_DB) {
+    for (const key of games) {
+      const dbPath = path.join(OUT, `${key}.db`);
+      if (!fs.existsSync(dbPath)) { console.log(`${key}: no ${dbPath}`); continue; }
+      console.log(key, JSON.stringify(writeWebJson(key, dbPath)));
+    }
+    return;
+  }
   const listPath = path.join(OUT, 'games.json');
   let list = {};
   try { list = JSON.parse(fs.readFileSync(listPath, 'utf8')).games || {}; } catch (e) { list = {}; }

@@ -32,7 +32,9 @@ jobs:
         run: |
           mkdir -p out
           if git fetch --depth 1 origin data 2>/dev/null; then
-            git show origin/data:games.json > out/games.json || true
+            # Everything from the last run (games.json, prices, the web catalogues):
+            # a prices-only day rewrites the prices and keeps the rest.
+            git archive origin/data | tar -x -C out
           fi
 
       - name: Catalogues (Mondays, first run, or when asked)
