@@ -57,6 +57,18 @@ jobs:
         if: steps.full.outputs.built != 'yes'
         run: node tools/build_games.js --out out --prices-only
 
+      # Sealed-product barcodes for the app's box scanner (tools/build_barcodes.js):
+      # weekly, or when the file is missing. A failure keeps last week's file.
+      - name: Barcodes
+        continue-on-error: true
+        timeout-minutes: 40
+        env:
+          FULL: ${{ github.event.inputs.full }}
+        run: |
+          if [ "$FULL" = "true" ] || [ "$(date -u +%u)" = "1" ] || [ ! -s out/barcodes.json ]; then
+            node tools/build_barcodes.js --out out
+          fi
+
       # Pokémon prices: fetched once here so phones read one small file per set
       # instead of each calling pokemontcg.io (tools/build_pokemon_prices.js).
       # A set that fails keeps yesterday's file; a bad day never blocks the

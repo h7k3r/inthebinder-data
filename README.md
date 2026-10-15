@@ -17,6 +17,9 @@ World, Magic: The Gathering and Yu-Gi-Oh!.
     pokemontcg.io by `tools/build_pokemon_prices.js` (TCGplayer and
     Cardmarket figures, same shape as the API), so phones never call the API
     directly. Optional repo secret `POKEMONTCG_API_KEY` raises its allowance.
+  - `barcodes.json` - sealed-product barcodes from TCGplayer's catalogue
+    (`tools/build_barcodes.js`, weekly), so the box scanner rarely needs
+    UPCitemdb: `{ built, count, items: { "<digits, no leading zeros>": [name, game, set, productId] } }`
 
 The In the Binder app downloads a game's catalogue the first time it is
 opened and checks it against `games.json` (size and SHA-256).
