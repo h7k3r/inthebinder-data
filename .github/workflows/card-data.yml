@@ -20,7 +20,7 @@ concurrency:
 jobs:
   data:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
 
@@ -56,6 +56,17 @@ jobs:
       - name: Prices
         if: steps.full.outputs.built != 'yes'
         run: node tools/build_games.js --out out --prices-only
+
+      # Pokémon prices: fetched once here so phones read one small file per set
+      # instead of each calling pokemontcg.io (tools/build_pokemon_prices.js).
+      # A set that fails keeps yesterday's file; a bad day never blocks the
+      # other games' prices from publishing.
+      - name: Pokémon prices
+        continue-on-error: true
+        timeout-minutes: 80
+        env:
+          POKEMONTCG_API_KEY: ${{ secrets.POKEMONTCG_API_KEY }}
+        run: node tools/build_pokemon_prices.js --out out
 
       - name: Publish the data branch (one commit, replaced each run)
         run: |

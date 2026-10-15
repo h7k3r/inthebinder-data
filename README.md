@@ -13,6 +13,10 @@ World, Magic: The Gathering and Yu-Gi-Oh!.
   each run), so this repository never grows:
   - `games.json` - every catalogue: counts, download URL, size, SHA-256
   - `<game>-prices.json` - `{ day, currency: "USD", prices: { "<productId>|<finish>": market } }`
+  - `pokemon/<setId>.json` - PokǸmon prices per set, copied once a day from
+    pokemontcg.io by `tools/build_pokemon_prices.js` (TCGplayer and
+    Cardmarket figures, same shape as the API), so phones never call the API
+    directly. Optional repo secret `POKEMONTCG_API_KEY` raises its allowance.
 
 The In the Binder app downloads a game's catalogue the first time it is
 opened and checks it against `games.json` (size and SHA-256).
