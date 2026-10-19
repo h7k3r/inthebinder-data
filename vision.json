@@ -4,17 +4,17 @@
     "op": {
       "built_at": "2026-10-07T00:46:35.315Z",
       "bin": {
-        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/op-vision.bin",
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261019/op-vision.bin",
         "bytes": 3474432,
         "sha256": "0ef4b4f3a55cbf2851808df7e9219e77f8c25d0c95addeb0ab712a5e098c2a30"
       },
       "scale": {
-        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/op-vision.scale",
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261019/op-vision.scale",
         "bytes": 27144,
         "sha256": "a5d562e837dbf6a79a4599a50a1eb799182297b42cfdfb6155a3b1d13127c57f"
       },
       "ids": {
-        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/op-vision.ids.json",
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261019/op-vision.ids.json",
         "bytes": 81433,
         "sha256": "eeda9b8f33702477a5f2463905c71ff32370c3bc6ce643c8dbfe09be1d2483e9"
       },
@@ -33,17 +33,17 @@
     "lorcana": {
       "built_at": "2026-10-07T00:46:35.324Z",
       "bin": {
-        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/lorcana-vision.bin",
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261019/lorcana-vision.bin",
         "bytes": 1839616,
         "sha256": "35d8476ebc07b369fbaf8cf76aad0a47cd25df19976fd79a389fd0f77d4ac72b"
       },
       "scale": {
-        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/lorcana-vision.scale",
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261019/lorcana-vision.scale",
         "bytes": 14372,
         "sha256": "d5992aca5d03653be4152d8cd476cca0d90f1ecf3d2a2860f6501d89a3d97fe5"
       },
       "ids": {
-        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/lorcana-vision.ids.json",
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261019/lorcana-vision.ids.json",
         "bytes": 61082,
         "sha256": "9d5ca4fdf50e3daef4ced08efcca6208997bbc509df4c1b491a8ebeab1188c0a"
       },
@@ -62,17 +62,17 @@
     "dbsfw": {
       "built_at": "2026-10-07T00:46:35.330Z",
       "bin": {
-        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/dbsfw-vision.bin",
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261019/dbsfw-vision.bin",
         "bytes": 2186240,
         "sha256": "eed8b5c08ef67b0c20906e0c19c00980bf6a16c67a4c6f522cb28eae899bf568"
       },
       "scale": {
-        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/dbsfw-vision.scale",
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261019/dbsfw-vision.scale",
         "bytes": 17080,
         "sha256": "3b76d88862972d55411958c9a7148c374fadeb5230f45498f5e86cb0de6b9225"
       },
       "ids": {
-        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/dbsfw-vision.ids.json",
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261019/dbsfw-vision.ids.json",
         "bytes": 64051,
         "sha256": "2ba7ed21503d13538aa1abd4ec1c4ce65bbaf0538d746902e9dd8b9870e23e0e"
       },
@@ -89,32 +89,61 @@
       }
     },
     "ygo": {
-      "built_at": "2026-10-07T13:07:44.185Z",
+      "built_at": "2026-10-19T21:21:10.422Z",
       "bin": {
-        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/ygo-vision.bin",
-        "bytes": 22963712,
-        "sha256": "09bc449fd1a36c794c33af71b7a2ba719ccc128c52e9c4132ff4eeb1a2bc6ecf"
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261019/ygo-vision.bin",
+        "bytes": 23035904,
+        "sha256": "4acf70095cb993ed428c0b32fa18c2d5dff3773837e16a4880ef08365eb21e67"
       },
       "scale": {
-        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/ygo-vision.scale",
-        "bytes": 179404,
-        "sha256": "40f3920a9c500308659953594dfc17ce15c48aa6f743fa9f8b9c4895201c4c78"
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261019/ygo-vision.scale",
+        "bytes": 179968,
+        "sha256": "3b9e2654f820ebf7321b6282e2d2a5bcd4af880e4c5d33c8ab472f85dcdbd361"
       },
       "ids": {
-        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261007/ygo-vision.ids.json",
-        "bytes": 565947,
-        "sha256": "5a79f7f5f708b4ca3b502e9a8166fcf676eabcf734d2f7bcfa9f47ba05d7be26"
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261019/ygo-vision.ids.json",
+        "bytes": 567780,
+        "sha256": "fb7d4bd1412dff480832a338cc9984d62fa1cea11ece20d8c85e2e6a77f8c626"
       },
-      "count": 44851,
+      "count": 44992,
       "eval": {
         "game": "ygo",
-        "cards": 44851,
+        "cards": 44992,
         "tested": 600,
         "top1_exact": 0.96,
-        "top1_same_card": 0.9667,
-        "top5": 0.9967,
+        "top1_same_card": 0.975,
+        "top5": 0.995,
         "pokemon_would_win": 0,
-        "median_top_score": 0.92
+        "median_top_score": 0.919
+      }
+    },
+    "mtg": {
+      "built_at": "2026-10-19T21:21:10.396Z",
+      "bin": {
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261019/mtg-vision.bin",
+        "bytes": 19736064,
+        "sha256": "0e13c17665a6bb9dfc919b72d0ad34e542f82a8cf422c735a53e54dc8359355b"
+      },
+      "scale": {
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261019/mtg-vision.scale",
+        "bytes": 154188,
+        "sha256": "d04fbc59cfff40d6224b6adeaea24477026f70a05cd68de758bdb7f22285e622"
+      },
+      "ids": {
+        "url": "https://github.com/h7k3r/inthebinder-data/releases/download/vision-20261019/mtg-vision.ids.json",
+        "bytes": 500157,
+        "sha256": "eb194a2616b928b27d4dc4885bc4ed10b4ecb0edbcb7ce83adf513dfd7300678"
+      },
+      "count": 38547,
+      "eval": {
+        "game": "mtg",
+        "cards": 38547,
+        "tested": 600,
+        "top1_exact": 0.8917,
+        "top1_same_card": 0.9367,
+        "top5": 0.9867,
+        "pokemon_would_win": 0,
+        "median_top_score": 0.926
       }
     }
   },
