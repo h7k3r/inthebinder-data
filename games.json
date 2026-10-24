@@ -1,0 +1,136 @@
+{
+ "format": 1,
+ "updated": "2026-10-24T11:09:21.552Z",
+ "games": {
+  "op": {
+   "key": "op",
+   "name": "One Piece Card Game",
+   "built_at": "2026-10-19T13:24:15Z",
+   "sets": 87,
+   "cards": 7061,
+   "slots": 7081,
+   "sealed": 679,
+   "db": {
+    "file": "op.db",
+    "bytes": 2097152,
+    "sha256": "e9f8f2ceaba7ac1334128cf4f35024c31bd49bfb8c8af05b20362dd8ddf5589e",
+    "url": "https://github.com/h7k3r/inthebinder-data/releases/download/catalog-20261019/op.db"
+   },
+   "prices": {
+    "file": "op-prices.json",
+    "bytes": 153438,
+    "day": "2026-10-24",
+    "count": 7541
+   },
+   "web": {
+    "file": "op-web.json",
+    "bytes": 767279
+   },
+   "seconds": 21
+  },
+  "lorcana": {
+   "key": "lorcana",
+   "name": "Disney Lorcana",
+   "built_at": "2026-10-19T13:24:20Z",
+   "sets": 20,
+   "cards": 3605,
+   "slots": 6453,
+   "sealed": 366,
+   "db": {
+    "file": "lorcana.db",
+    "bytes": 1888256,
+    "sha256": "d8717d96c5d6e9e604e99efb98a4d2f732dc149410e70fdf6f6559d8856010a3",
+    "url": "https://github.com/h7k3r/inthebinder-data/releases/download/catalog-20261019/lorcana.db"
+   },
+   "prices": {
+    "file": "lorcana-prices.json",
+    "bytes": 149972,
+    "day": "2026-10-24",
+    "count": 6804
+   },
+   "web": {
+    "file": "lorcana-web.json",
+    "bytes": 591130
+   },
+   "seconds": 5
+  },
+  "dbsfw": {
+   "key": "dbsfw",
+   "name": "Dragon Ball Super Fusion World",
+   "built_at": "2026-10-19T13:24:33Z",
+   "sets": 51,
+   "cards": 4360,
+   "slots": 4429,
+   "sealed": 189,
+   "db": {
+    "file": "dbsfw.db",
+    "bytes": 1449984,
+    "sha256": "43af91de448d53fa116a7693e849fdc25c7b710cb41b0c0852ec43d40aa3accd",
+    "url": "https://github.com/h7k3r/inthebinder-data/releases/download/catalog-20261019/dbsfw.db"
+   },
+   "prices": {
+    "file": "dbsfw-prices.json",
+    "bytes": 98893,
+    "day": "2026-10-24",
+    "count": 4528
+   },
+   "web": {
+    "file": "dbsfw-web.json",
+    "bytes": 527225
+   },
+   "seconds": 12
+  },
+  "mtg": {
+   "key": "mtg",
+   "name": "Magic: The Gathering",
+   "built_at": "2026-10-19T13:26:21Z",
+   "sets": 454,
+   "cards": 105522,
+   "slots": 155186,
+   "sealed": 13706,
+   "db": {
+    "file": "mtg.db",
+    "bytes": 37974016,
+    "sha256": "339f1657d81a45af3a7ad91879f690df3ea5ce895a1a6cb9b85e5fbd6a1e1d7c",
+    "url": "https://github.com/h7k3r/inthebinder-data/releases/download/catalog-20261019/mtg.db"
+   },
+   "prices": {
+    "file": "mtg-prices.json",
+    "bytes": 3244694,
+    "day": "2026-10-24",
+    "count": 163456
+   },
+   "web": {
+    "file": "mtg-web.json",
+    "bytes": 12405864
+   },
+   "seconds": 110
+  },
+  "ygo": {
+   "key": "ygo",
+   "name": "Yu-Gi-Oh!",
+   "built_at": "2026-10-19T13:32:54Z",
+   "sets": 657,
+   "cards": 46533,
+   "slots": 60198,
+   "sealed": 1315,
+   "db": {
+    "file": "ygo.db",
+    "bytes": 17285120,
+    "sha256": "d7e1ad9c9992ab7a6d005ded8bb869f015f508f010c1bb0d28e85aa252fa97d2",
+    "url": "https://github.com/h7k3r/inthebinder-data/releases/download/catalog-20261019/ygo.db"
+   },
+   "prices": {
+    "file": "ygo-prices.json",
+    "bytes": 1539688,
+    "day": "2026-10-24",
+    "count": 61144
+   },
+   "web": {
+    "file": "ygo-web.json",
+    "bytes": 6501405
+   },
+   "seconds": 393
+  }
+ }
+}
