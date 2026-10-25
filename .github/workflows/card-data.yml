@@ -98,6 +98,17 @@ jobs:
           POKEMONTCG_API_KEY: ${{ secrets.POKEMONTCG_API_KEY }}
         run: node tools/build_pokemon_prices.js --out out
 
+      # "Hot today" on the app's Home: the biggest price risers since the
+      # last run (tools/build_pokemon_hot.js -> pokemon/hot.json). Keeps a
+      # snapshot of today's prices on the data branch for tomorrow's run.
+      - name: Hot today checks
+        run: node tools/test_pokemon_hot.js
+
+      - name: Hot today
+        continue-on-error: true
+        timeout-minutes: 5
+        run: node tools/build_pokemon_hot.js --out out
+
       - name: Publish the data branch (one commit, replaced each run)
         run: |
           cd out
