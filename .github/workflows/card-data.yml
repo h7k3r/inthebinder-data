@@ -9,6 +9,10 @@ on:
         description: 'Rebuild the card catalogues too (not just prices)'
         type: boolean
         default: false
+      history:
+        description: 'Rebuild the Pokemon price history from the tcgcsv archives (since Feb 2024)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -108,6 +112,23 @@ jobs:
         continue-on-error: true
         timeout-minutes: 5
         run: node tools/build_pokemon_hot.js --out out
+
+      # Pokemon price history for the card page's value chart
+      # (tools/build_pokemon_history.js -> pokemon/history/<setId>.json): one
+      # point a week since 8 Feb 2024, from tcgcsv.com's daily archives. Built
+      # once (or when asked), then topped up weekly from the live files.
+      - name: Pokemon price history
+        continue-on-error: true
+        timeout-minutes: 60
+        env:
+          HISTORY: ${{ github.event.inputs.history }}
+        run: |
+          if [ "$HISTORY" = "true" ] || [ ! -d out/pokemon/history ]; then
+            sudo apt-get install -y -qq p7zip-full >/dev/null
+            node tools/build_pokemon_history.js --out out --backfill --cache /tmp/tcgcsv-archive
+          else
+            node tools/build_pokemon_history.js --out out
+          fi
 
       - name: Publish the data branch (one commit, replaced each run)
         run: |
