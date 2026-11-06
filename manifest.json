@@ -1,37 +1,45 @@
 {
   "format": 1,
-  "version": "2026-11-03T15:05:28Z",
-  "sets": 180,
-  "cards": 20785,
-  "source": "github.com/PokemonTCG/pokemon-tcg-data@8b4e387930ead7be6595b4d4c59b7ba7a3a79f08 + extra_sets/mcd23.json + extra_sets/mcd24.json + extra_sets/me55.json + extra_sets/me55c.json + extra_sets/mee.json + extra_sets/mep.json",
+  "version": "2026-11-06T15:18:39Z",
+  "sets": 181,
+  "cards": 20926,
+  "source": "github.com/PokemonTCG/pokemon-tcg-data@8b4e387930ead7be6595b4d4c59b7ba7a3a79f08 + extra_sets/mcd23.json + extra_sets/mcd24.json + extra_sets/me55.json + extra_sets/me55c.json + extra_sets/mee.json + extra_sets/mep.json + auto 2026-11-06 (me6)",
   "db": {
-    "path": "v/2026-11-03T15-05-28Z/pokecard.db",
-    "sha256": "8d7ec5dd93f09ea971364b0a96d920df301acbc71e173fda1c7aab4a29df00f4",
-    "bytes": 10170368
+    "path": "v/2026-11-06T15-18-39Z/pokecard.db",
+    "sha256": "7ef0cace50b7822b850a3d9d7c316ebc3cd727fb6c25cdd12841423e6bbb9e21",
+    "bytes": 10338304
   },
   "vision": {
     "embedder_sha": "bcf1b9fc23a2",
     "dim": 512,
-    "count": 32448,
+    "count": 32589,
     "index": {
-      "path": "v/2026-11-03T15-05-28Z/index.bin",
-      "sha256": "b2977b51a6b8be980204bd47dfe6092277afcf617f843206e49de6fa2d24b518",
-      "bytes": 16613376
+      "path": "v/2026-11-06T15-18-39Z/index.bin",
+      "sha256": "93e9389c86b2199dfff8b90c93b4e270251e77ae814f260a7ba639670d4a786f",
+      "bytes": 16685568
     },
     "scale": {
-      "path": "v/2026-11-03T15-05-28Z/index_scale.bin",
-      "sha256": "d904760a50cebef957e8516c0eed90f0b5dc1628b29e79bf0f496b579cbc0d87",
-      "bytes": 129792
+      "path": "v/2026-11-06T15-18-39Z/index_scale.bin",
+      "sha256": "cedc48f6f1c091e7eacb1f84f0e153ee234433e651a4d3b4e384d3d3de9f33f6",
+      "bytes": 130356
     },
     "ids": {
-      "path": "v/2026-11-03T15-05-28Z/index_ids.json",
-      "sha256": "5c8b01185783dae2a7c7cb64471c7f807ae1199355ac9a41f272e94f53f3fcb7",
-      "bytes": 383577
+      "path": "v/2026-11-06T15-18-39Z/index_ids.json",
+      "sha256": "89dad7a24a6061f088c057e501e0f095aca68a52539bfd4c0989bfd1ebb6ca65",
+      "bytes": 384879
     }
   },
   "i18n": {
-    "path": "v/2026-11-03T15-05-28Z/pokecard_i18n.db",
+    "path": "v/2026-11-06T15-18-39Z/pokecard_i18n.db",
     "sha256": "9bf001463f6c608d10af36fbccf50e2077f6ea332981e8275a7281a02ac123a3",
     "bytes": 7376896
-  }
+  },
+  "news": [
+    {
+      "id": "me6",
+      "name": "Delta Reign",
+      "lang": "en",
+      "release": "2026-11-06"
+    }
+  ]
 }
