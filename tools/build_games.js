@@ -4,7 +4,7 @@
  * tcgcsv.com (a daily public copy of TCGplayer's catalogue and prices).
  *
  *   node tools/build_games.js [game ...] [--out games] [--prices-only]
- *   games: op lorcana dbsfw mtg ygo   (default: all)
+ *   games: op lorcana dbsfw mtg ygo naruto   (default: all)
  *
  * Writes, per game:
  *   <out>/<game>.db          SQLite: meta, sets, cards, slots, sealed
@@ -39,6 +39,7 @@ const GAMES = {
   dbsfw:   { category: 80, name: 'Dragon Ball Super Fusion World', search: 'dragon ball super fusion world' },
   mtg:     { category: 1,  name: 'Magic: The Gathering', search: 'mtg' },
   ygo:     { category: 2,  name: 'Yu-Gi-Oh!', search: 'yugioh' },
+  naruto:  { category: 93, name: 'Naruto Card Game', search: 'naruto card game' },
 };
 const UA = { 'User-Agent': 'InTheBinder/1.0 (+https://inthebinder.com; support@inthebinder.com)' };
 const ROOT = path.resolve(__dirname, '..');
