@@ -14,6 +14,10 @@
  *
  *   node tools/build_pokemon_history.js --out out --backfill [--cache dir] [--from 2024-02-08]
  *       reads the archives (needs 7z / 7za on the PATH or in Program Files)
+ *   node tools/build_pokemon_history.js --out out --fill [--cache dir]
+ *       puts back the weeks missing from the files already there (a backfill
+ *       or top-up that stopped part way: 9 Nov 2026, Sep 2025 - Oct 2026),
+ *       from the archives, keeping every point already in them
  *   node tools/build_pokemon_history.js --out out
  *       the weekly top-up: if the newest point is 7+ days old, adds today's
  *       prices from tcgcsv's live files (one request per set)
@@ -34,6 +38,7 @@ const args = process.argv.slice(2);
 const opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
 const OUT = opt('--out', 'out');
 const BACKFILL = args.includes('--backfill');
+const FILL = args.includes('--fill');
 const CACHE = opt('--cache', path.join(os.tmpdir(), 'tcgcsv-archive'));
 const FROM = opt('--from', '2024-02-08');
 const ONLY = (opt('--sets', '') || '').split(',').filter(Boolean);
@@ -182,6 +187,91 @@ async function backfill() {
   console.log(`History: ${r.files} sets, ${r.series} price series, ${days.length} weeks`);
 }
 
+/** One archive day -> Map("cardId|variant" -> price), or null when there is none. */
+async function archiveDay(z, day, groups, byProduct) {
+  const file = path.join(CACHE, `prices-${day}.ppmd.7z`);
+  let have = fs.existsSync(file) && fs.statSync(file).size > 0;
+  if (!have) have = await download(`https://tcgcsv.com/archive/tcgplayer/prices-${day}.ppmd.7z`, file).catch(() => false);
+  if (!have) return null;
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'tcgh-'));
+  try {
+    execFileSync(z, ['x', file, `-o${tmp}`, `-ir!${day}${path.sep}3${path.sep}*`, '-y'], { stdio: 'ignore' });
+    const base = path.join(tmp, day, '3');
+    const rows = [];
+    for (const g of fs.existsSync(base) ? fs.readdirSync(base) : []) {
+      if (!groups.has(g)) continue;
+      const j = readJson(path.join(base, g, 'prices'), null);
+      if (j && Array.isArray(j.results)) rows.push(...j.results);
+    }
+    return pricesFromRows(rows, byProduct);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+}
+
+/** The weeks missing from the files already there, put back in date order. */
+async function fill() {
+  const z = sevenZip();
+  const { setOf, byProduct, groups } = loadIndex();
+  fs.mkdirSync(CACHE, { recursive: true });
+  const dir = path.join(OUT, 'pokemon', 'history');
+  const tables = new Map();
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.json'))) {
+    const t = readJson(path.join(dir, f), null);
+    if (t && Array.isArray(t.days) && t.cards && (!ONLY.length || ONLY.includes(t.set))) tables.set(t.set, t);
+  }
+  const known = new Set();
+  for (const t of tables.values()) for (const d of t.days) known.add(d);
+  const near = (d) => { for (let k = -3; k <= 3; k++) if (known.has(addDays(d, k))) return true; return false; };
+  const today = ymd(new Date());
+  const missing = [];
+  for (let d = FROM; d <= today; d = addDays(d, STEP)) if (!near(d)) missing.push(d);
+  console.log(`${missing.length} weeks missing`);
+  const got = new Map();   // day -> Map(cardId|variant -> price)
+  for (const day of missing) {
+    const p = await archiveDay(z, day, groups, byProduct);
+    if (!p || p.size < 1000) { console.log(`${day}: ${p ? `only ${p.size} prices` : 'no archive'}`); continue; }
+    got.set(day, p);
+    console.log(`${day}: ${p.size} prices`);
+  }
+  if (!got.size) { console.log('Nothing to add.'); return; }
+  // Which set each new price belongs to, per day.
+  const bySet = new Map();   // set -> Map(day -> [[id, variant, v]])
+  for (const [day, p] of got) {
+    for (const [k, v] of p) {
+      const [id, variant] = k.split('|');
+      const set = setOf.get(id);
+      if (!tables.has(set)) continue;
+      if (!bySet.has(set)) bySet.set(set, new Map());
+      const m = bySet.get(set);
+      if (!m.has(day)) m.set(day, []);
+      m.get(day).push([id, variant, v]);
+    }
+  }
+  for (const [set, t] of tables) {
+    const add = bySet.get(set) || new Map();
+    const days = [...new Set([...t.days, ...got.keys()])].sort();
+    const oldAt = new Map(t.days.map((d, i) => [d, i]));
+    const cards = {};
+    for (const [id, vs] of Object.entries(t.cards)) {
+      cards[id] = {};
+      for (const [v, arr] of Object.entries(vs)) cards[id][v] = days.map((d) => (oldAt.has(d) ? (arr[oldAt.get(d)] ?? null) : null));
+    }
+    for (const [day, list] of add) {
+      const i = days.indexOf(day);
+      for (const [id, variant, v] of list) {
+        if (!cards[id]) cards[id] = {};
+        if (!cards[id][variant]) cards[id][variant] = days.map(() => null);
+        cards[id][variant][i] = v;
+      }
+    }
+    t.days = days;
+    t.cards = cards;
+  }
+  const r = writeTables(tables);
+  console.log(`History filled: ${got.size} weeks added to ${r.files} sets`);
+}
+
 /** The weekly top-up from tcgcsv's live files. */
 async function topUp() {
   const dir = path.join(OUT, 'pokemon', 'history');
@@ -216,5 +306,5 @@ async function topUp() {
   console.log(`History topped up: ${r.files} sets`);
 }
 
-if (require.main === module) (BACKFILL ? backfill() : topUp()).catch((e) => { console.error(e); process.exitCode = 1; });
+if (require.main === module) (FILL ? fill() : BACKFILL ? backfill() : topUp()).catch((e) => { console.error(e); process.exitCode = 1; });
 module.exports = { pricesFromRows, APP_VARIANT };
