@@ -90,6 +90,22 @@ jobs:
             node tools/build_pokemon_map.js --out out --max-lookups 4000 --report
           fi
 
+      # Where each English card's picture lives on TCGdex, for phones
+      # (tools/build_pokemon_images.js -> pokemon/images.json, 13 Nov 2026).
+      # Rebuilt every day from the map, so a new set's TCGdex pictures reach
+      # phones without an app update. Any failure keeps yesterday's file and
+      # never stops the prices.
+      - name: Pokémon pictures checks
+        id: imgtest
+        continue-on-error: true
+        run: node tools/test_pokemon_images.js
+
+      - name: Pokémon pictures
+        if: steps.imgtest.outcome == 'success'
+        continue-on-error: true
+        timeout-minutes: 5
+        run: node tools/build_pokemon_images.js --out out
+
       # Pokémon prices: Cardmarket's daily price guide (EUR) and tcgcsv.com
       # (TCGplayer USD), joined through the map, so phones read one small file
       # per set (tools/build_pokemon_prices.js). pokemontcg.io is only a
