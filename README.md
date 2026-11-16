@@ -23,6 +23,11 @@ World, Magic: The Gathering and Yu-Gi-Oh!.
     TCGdex card and picture, Cardmarket product id and TCGplayer product id
     (`tools/build_pokemon_map.js`, weekly; only new cards are looked up).
     TCGdex's card data is MIT licensed (Copyright (c) 2021 TCGdex).
+  - `pokemon/images.json` - where each English card's picture lives on
+    TCGdex (`tools/build_pokemon_images.js`, daily, from the map): a folder
+    and numbering rule per set, plus the cards that differ. Phones use it in
+    place of the copy the app shipped with, so a new set's pictures arrive
+    with no app update.
   - `barcodes.json` - sealed-product barcodes from TCGplayer's catalogue
     (`tools/build_barcodes.js`, weekly), so the box scanner rarely needs
     Open Products Facts: `{ built, count, items: { "<digits, no leading zeros>": [name, game, set, productId] } }`
