@@ -33,6 +33,8 @@ jobs:
           node-version: '24'
 
       - name: Previous data
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p out
           if git fetch --depth 1 origin data 2>/dev/null; then
@@ -40,6 +42,10 @@ jobs:
             # a prices-only day rewrites the prices and keeps the rest.
             git archive origin/data | tar -x -C out
           fi
+          # Whatever could not be read - the whole branch, or the price
+          # history, card map or Hot snapshot - comes back from the newest
+          # weekly snapshot (tools/data_snapshot.sh, 16 Nov 2026). Never stops the run.
+          bash tools/data_snapshot.sh restore out || echo "::warning::could not check the snapshot (data_snapshot.sh restore failed)"
 
       - name: Catalogues (Mondays, first run, or when asked)
         id: full
@@ -158,3 +164,20 @@ jobs:
           git push -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data:data
         env:
           GH_TOKEN: ${{ github.token }}
+
+      # Once a week, a copy of what was just published as a release asset
+      # (data-snapshot-YYYYMMDD, the 8 newest kept), because the data branch
+      # is replaced on every run and the price history exists nowhere else.
+      # "Previous data" puts it back if a run ever starts without it.
+      - name: Snapshot checks
+        id: snaptest
+        continue-on-error: true
+        run: bash tools/test_data_snapshot.sh
+
+      - name: Weekly snapshot
+        if: steps.snaptest.outcome == 'success'
+        continue-on-error: true
+        timeout-minutes: 10
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash tools/data_snapshot.sh save out
