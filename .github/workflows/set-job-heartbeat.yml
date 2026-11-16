@@ -1,0 +1,66 @@
+name: Set job heartbeat
+
+# Is the new-sets job on xproto still running? (16 Nov 2026)
+# tools\update_sets.ps1 (binder-tcg) pushes heartbeat.json to the `heartbeat`
+# branch after every run, twice a day. Once a day this checks it
+# (tools/check_heartbeat.js): no run, or only failed runs, for 48 hours opens
+# an issue here - GitHub emails the owner - and the issue closes itself on the
+# first good day after. The job's own alerts (a set held for checking, a
+# quiet source) are listed on each run's summary page.
+
+on:
+  schedule:
+    - cron: '41 13 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: set-job-heartbeat
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TITLE: 'Set job heartbeat: needs a look'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checks
+        run: node tools/test_heartbeat.js
+
+      - name: Read the heartbeat
+        run: |
+          rm -f /tmp/heartbeat.json
+          if git fetch -q --depth 1 origin heartbeat; then
+            git show FETCH_HEAD:heartbeat.json > /tmp/heartbeat.json || rm -f /tmp/heartbeat.json
+          fi
+
+      - name: Check it
+        id: check
+        continue-on-error: true
+        run: node tools/check_heartbeat.js /tmp/heartbeat.json --report /tmp/report.md
+
+      - name: Open an issue
+        if: steps.check.outcome == 'failure'
+        run: |
+          open=$(gh issue list --state open --search "in:title \"$TITLE\"" --json number --jq '.[0].number // empty')
+          if [ -z "$open" ]; then
+            { cat /tmp/report.md; echo; echo "This closes itself once the job reports a good run again. cc @${{ github.repository_owner }}"; } > /tmp/body.md
+            gh issue create --title "$TITLE" --body-file /tmp/body.md
+          else
+            echo "issue #$open is already open"
+          fi
+          exit 1
+
+      - name: Close the issue when it is fine again
+        if: steps.check.outcome == 'success'
+        run: |
+          for n in $(gh issue list --state open --search "in:title \"$TITLE\"" --json number --jq '.[].number'); do
+            gh issue close "$n" --comment "Fine again: $(head -n 3 /tmp/report.md | tail -n 1)"
+          done

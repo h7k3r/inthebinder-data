@@ -35,5 +35,21 @@ World, Magic: The Gathering and Yu-Gi-Oh!.
 The In the Binder app downloads a game's catalogue the first time it is
 opened and checks it against `games.json` (size and SHA-256).
 
+## Safety nets (16 Nov 2026)
+
+- **Weekly snapshot.** Because the `data` branch is replaced every run, the
+  Card data workflow also saves what it published as a release asset once a
+  week (`data-snapshot-YYYYMMDD`, `tools/data_snapshot.sh save`, the 8 newest
+  kept). The price history, card map and Hot snapshot are built up over time
+  and could not be rebuilt in full, so the next run's "Previous data" step puts
+  them back from the newest snapshot if they are ever missing
+  (`tools/data_snapshot.sh restore`). A snapshot is refused if it has under
+  80% of the previous one's files. Checks: `bash tools/test_data_snapshot.sh`.
+- **Set job heartbeat.** The new-sets job on xproto (`tools\update_sets.ps1` in
+  binder-tcg) pushes `heartbeat.json` to the `heartbeat` branch after every
+  run. The Set job heartbeat workflow checks it daily and opens an issue
+  (GitHub emails the owner) when the job has not run, or has only failed, for
+  48 hours (`tools/check_heartbeat.js`; checks: `node tools/test_heartbeat.js`).
+
 Card names, numbers and prices belong to their publishers and TCGplayer.
 In the Binder is an independent app, not affiliated with any of them.
