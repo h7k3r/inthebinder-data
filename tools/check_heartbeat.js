@@ -7,7 +7,9 @@
  * branch of this repository:
  *   { at, lastOk, status, alerts: [..], en: {changed, addedCards},
  *     ja: {changed, addedCards}, sources: [{name, last, days}] }
- * `lastOk` is the end of the last run that did not fail.
+ * `lastOk` is the end of the last run that did not fail. Once the
+ * collections backup is set up, `backup: { at, ok, lastGood, copies,
+ * needsLook }` comes too: no good backup for STALE_HOURS is a problem.
  *
  * The Set job heartbeat workflow runs this once a day:
  *   node tools/check_heartbeat.js <heartbeat.json> [--report <file.md>] [--now <ISO>]
@@ -48,6 +50,17 @@ function judge(text, now = Date.now()) {
       problems.push(`The set job runs but has failed every time since ${when(hb.lastOk)}; last status "${hb.status}". See C:\\Users\\xproto\\itb-sets-logs on xproto.`);
     }
     for (const a of Array.isArray(hb.alerts) ? hb.alerts : []) warnings.push(String(a));
+    // The collections backup on xproto (binder-tcg server/sync-worker/backup)
+    // rides on the heartbeat once it is set up; no `backup` = not set up.
+    const bk = hb.backup;
+    if (bk) {
+      const age = hoursSince(bk.lastGood, now);
+      if (!(age <= STALE_HOURS)) problems.push(`No good collections backup since ${when(bk.lastGood)}${bk.ok === false ? ' - the last one failed' : ''}. See D:\\itb-backups\\itb-sync\\last.json and D:\\itb-backups\\logs on xproto.`);
+      else {
+        if (bk.needsLook) warnings.push('The last collections backup was saved but needs a look (D:\\itb-backups\\itb-sync\\last.json on xproto).');
+        if (bk.ok && !bk.copies) warnings.push('The last collections backup has no Google Drive copy (only on xproto).');
+      }
+    }
   }
   return { problems, warnings, hb };
 }
@@ -59,6 +72,7 @@ function report({ problems, warnings, hb }) {
     const n = (x) => (x && x.addedCards) || 0;
     lines.push(`New cards in that run: English ${n(hb.en)}, Japanese ${n(hb.ja)}.`);
     for (const s of Array.isArray(hb.sources) ? hb.sources : []) lines.push(`- Source ${s.name}: last change ${when(s.last)} (${s.days} days ago)`);
+    if (hb.backup) lines.push(`- Collections backup: last good ${when(hb.backup.lastGood)}, ${hb.backup.copies ? 'with' : 'without'} the Google Drive copy`);
     lines.push('');
   }
   if (problems.length) lines.push('### Needs a look', '', ...problems.map((p) => `- ${p}`), '');

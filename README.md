@@ -50,6 +50,9 @@ opened and checks it against `games.json` (size and SHA-256).
   run. The Set job heartbeat workflow checks it daily and opens an issue
   (GitHub emails the owner) when the job has not run, or has only failed, for
   48 hours (`tools/check_heartbeat.js`; checks: `node tools/test_heartbeat.js`).
+  The same goes for the nightly collections backup on xproto, whose status
+  rides on the heartbeat (when and whether it worked; no counts, as this
+  repository is public).
 
 Card names, numbers and prices belong to their publishers and TCGplayer.
 In the Binder is an independent app, not affiliated with any of them.

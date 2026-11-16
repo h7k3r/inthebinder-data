@@ -55,6 +55,19 @@ t('the report names the sources and the counts', () => {
   assert.match(md, /Source English: last change .* \(4 days ago\)/);
   assert.match(md, /All fine\./);
 });
+t('collections backup: absent is fine, stale or failing is not', () => {
+  assert.strictEqual(judge(hb({ at: h(2), lastOk: h(2) }), now).problems.length, 0, 'not set up yet');
+  const good = { at: h(8), ok: true, lastGood: h(8), copies: 1, needsLook: false };
+  let r = judge(hb({ at: h(2), lastOk: h(2), backup: good }), now);
+  assert.deepStrictEqual([r.problems, r.warnings], [[], []]);
+  assert.match(report(r), /Collections backup: last good .* with the Google Drive copy/);
+  r = judge(hb({ at: h(2), lastOk: h(2), backup: { ...good, at: h(1), ok: false, lastGood: h(55) } }), now);
+  assert.match(r.problems[0], /No good collections backup since .* - the last one failed\. See D:\\itb-backups/);
+  r = judge(hb({ at: h(2), lastOk: h(2), backup: { ...good, needsLook: true, copies: 0 } }), now);
+  assert.strictEqual(r.problems.length, 0);
+  assert.strictEqual(r.warnings.length, 2);
+  assert.match(r.warnings.join(' '), /needs a look.*no Google Drive copy/);
+});
 t('command line: exit codes and the report file', () => {
   const d = fs.mkdtempSync(path.join(os.tmpdir(), 'hb-'));
   const f = path.join(d, 'heartbeat.json'), md = path.join(d, 'r.md');
