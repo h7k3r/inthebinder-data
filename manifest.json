@@ -1,36 +1,36 @@
 {
   "format": 1,
-  "version": "2026-11-06T15:48:39Z",
+  "version": "2026-11-18T08:40:48Z",
   "sets": 181,
-  "cards": 20926,
-  "source": "github.com/PokemonTCG/pokemon-tcg-data@8b4e387930ead7be6595b4d4c59b7ba7a3a79f08 + extra_sets/mcd23.json + extra_sets/mcd24.json + extra_sets/me55.json + extra_sets/me55c.json + extra_sets/mee.json + extra_sets/mep.json + auto 2026-11-06 (me6)",
+  "cards": 20935,
+  "source": "github.com/PokemonTCG/pokemon-tcg-data@8b4e387930ead7be6595b4d4c59b7ba7a3a79f08 + extra_sets/mcd23.json + extra_sets/mcd24.json + extra_sets/me55.json + extra_sets/me55c.json + extra_sets/mee.json + extra_sets/mep.json + auto 2026-11-06 (me6) + auto 2026-11-18 (mep)",
   "db": {
-    "path": "v/2026-11-06T15-48-39Z/pokecard.db",
-    "sha256": "34b55dccfde70ef981d2a442530378378cc27deed486f03ca60cedb9cb1a8168",
-    "bytes": 10338304
+    "path": "v/2026-11-18T08-40-48Z/pokecard.db",
+    "sha256": "6bee1e1c132bfc1efbc541196096f75b7bae9b92db850e3a9a567dbb7fdc57bc",
+    "bytes": 10346496
   },
   "vision": {
     "embedder_sha": "bcf1b9fc23a2",
     "dim": 512,
-    "count": 32589,
+    "count": 32598,
     "index": {
-      "path": "v/2026-11-06T15-48-39Z/index.bin",
-      "sha256": "93e9389c86b2199dfff8b90c93b4e270251e77ae814f260a7ba639670d4a786f",
-      "bytes": 16685568
+      "path": "v/2026-11-18T08-40-48Z/index.bin",
+      "sha256": "3127f50b111ddbeaabbe6e48c59cb909a834a8771a23898d88aeae8cc7707440",
+      "bytes": 16690176
     },
     "scale": {
-      "path": "v/2026-11-06T15-48-39Z/index_scale.bin",
-      "sha256": "cedc48f6f1c091e7eacb1f84f0e153ee234433e651a4d3b4e384d3d3de9f33f6",
-      "bytes": 130356
+      "path": "v/2026-11-18T08-40-48Z/index_scale.bin",
+      "sha256": "a4be77bfa4a58d4514c39171b1c1bc1958e2be3fa274f7e13aa2d35b4229c6ba",
+      "bytes": 130392
     },
     "ids": {
-      "path": "v/2026-11-06T15-48-39Z/index_ids.json",
-      "sha256": "89dad7a24a6061f088c057e501e0f095aca68a52539bfd4c0989bfd1ebb6ca65",
-      "bytes": 384879
+      "path": "v/2026-11-18T08-40-48Z/index_ids.json",
+      "sha256": "b402603ba67c9147343e4dc6af911e868c49c197b327be2aa3bcc1b52fb1b156",
+      "bytes": 384969
     }
   },
   "i18n": {
-    "path": "v/2026-11-06T15-48-39Z/pokecard_i18n.db",
+    "path": "v/2026-11-18T08-40-48Z/pokecard_i18n.db",
     "sha256": "9bf001463f6c608d10af36fbccf50e2077f6ea332981e8275a7281a02ac123a3",
     "bytes": 7376896
   },
