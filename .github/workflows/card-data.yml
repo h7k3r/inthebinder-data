@@ -80,6 +80,14 @@ jobs:
         timeout-minutes: 30
         run: node tools/build_pokemon_sealed.js --out out
 
+      # Weekly price of each sealed product since Feb 2024 for the app's box
+      # screen chart (tools/build_pokemon_sealed_history.js). Backfilled once on
+      # xproto (20 Nov 2026); topped up here weekly from pokemon-sealed.json.
+      - name: Pok?mon sealed price history
+        continue-on-error: true
+        timeout-minutes: 10
+        run: node tools/build_pokemon_sealed_history.js --out out
+
       # Pokémon card map (tools/build_pokemon_map.js): links the app's own card
       # list (pokemon-catalog.json) to TCGdex, Cardmarket and TCGplayer ids.
       # Weekly, or when missing; ids found before are kept, so only new cards

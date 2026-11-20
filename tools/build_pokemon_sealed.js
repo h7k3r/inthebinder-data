@@ -29,6 +29,7 @@ const TYPES = [
   [/pok[eé]mon cent(er|re) elite trainer box|\bpc etb\b/i, 'Pokémon Center ETB'],
   [/\b(case|display)\b/i, 'Case / Display'],
   [/elite trainer box/i, 'Elite Trainer Box'],
+  [/half booster box/i, 'Half Booster Box'],
   [/booster box/i, 'Booster Box'],
   [/booster bundle/i, 'Booster Bundle'],
   [/\bpromo\b|classic collection pack/i, 'Promo Pack'],
