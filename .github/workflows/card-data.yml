@@ -73,6 +73,13 @@ jobs:
             node tools/build_barcodes.js --out out
           fi
 
+      # Pok?mon sealed catalogue with today's prices for the app's Sealed tab
+      # (tools/build_pokemon_sealed.js): daily. A failure keeps yesterday's file.
+      - name: Pok?mon sealed
+        continue-on-error: true
+        timeout-minutes: 30
+        run: node tools/build_pokemon_sealed.js --out out
+
       # Pokémon card map (tools/build_pokemon_map.js): links the app's own card
       # list (pokemon-catalog.json) to TCGdex, Cardmarket and TCGplayer ids.
       # Weekly, or when missing; ids found before are kept, so only new cards
