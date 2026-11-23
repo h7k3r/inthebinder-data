@@ -1,0 +1,36 @@
+{
+  "v": 1,
+  "updated": "2026-11-22",
+  "about": "How often each rarity turns up in one English booster pack, as 1 in N packs for ANY card of that rarity. Pokemon publishes no odds: these are measured counts (mostly the TCGplayer Authentication Center, thousands of packs per set) or marked est. Read by In the Binder (phone, web, Pro Tracker).",
+  "series": {
+    "me": {
+      "rates": { "Double Rare": 5, "Illustration Rare": 9, "Ultra Rare": 12, "Special Illustration Rare": 80, "Mega Hyper Rare": 1081 },
+      "by": "TCGplayer (Pitch Black)",
+      "est": true,
+      "box": true
+    }
+  },
+  "sets": {
+    "me1": { "rates": { "Double Rare": 5, "Illustration Rare": 9, "Special Illustration Rare": 101, "Mega Hyper Rare": 1260 }, "by": "TCGplayer", "box": true },
+    "me2": { "rates": { "Double Rare": 5, "Illustration Rare": 9, "Special Illustration Rare": 80, "Mega Hyper Rare": 1260 }, "by": "TCGplayer", "box": true },
+    "me2pt5": { "rates": { "Double Rare": 5, "Illustration Rare": 9, "Ultra Rare": 21, "Mega Attack Rare": 29, "Special Illustration Rare": 70, "Mega Hyper Rare": 540 }, "by": "TCGplayer", "box": false, "god": "950-2,000" },
+    "me3": { "rates": { "Double Rare": 5, "Illustration Rare": 9, "Ultra Rare": 12, "Special Illustration Rare": 80, "Mega Hyper Rare": 1000 }, "by": "TCGplayer", "box": true },
+    "me4": { "rates": { "Double Rare": 5, "Illustration Rare": 9, "Ultra Rare": 12, "Special Illustration Rare": 90, "Mega Hyper Rare": 956 }, "by": "TCGplayer", "box": true },
+    "me5": { "rates": { "Double Rare": 5, "Illustration Rare": 9, "Ultra Rare": 12, "Special Illustration Rare": 80, "Mega Hyper Rare": 1081 }, "by": "TCGplayer", "box": true },
+    "me55": { "rates": { "Illustration Rare": 5, "Special Illustration Rare": 21, "Futuristic Rare": 100, "RGB Rare": 3200 }, "by": "TCGplayer", "box": false },
+    "me6": { "rates": { "Double Rare": 5, "Illustration Rare": 9, "Ultra Rare": 12, "Special Illustration Rare": 80, "Mega Hyper Rare": 1081 }, "by": "TCGplayer (Pitch Black)", "est": true, "box": true },
+    "sv1": { "rates": { "Double Rare": 5, "Illustration Rare": 9, "Special Illustration Rare": 32, "Hyper Rare": 54 }, "by": "TCGplayer", "box": true },
+    "sv2": { "rates": { "Special Illustration Rare": 32, "Hyper Rare": 54 }, "by": "TCGplayer", "box": true },
+    "sv3": { "rates": { "Special Illustration Rare": 32, "Hyper Rare": 54 }, "by": "TCGplayer", "box": true },
+    "sv3pt5": { "rates": {}, "by": "", "box": false, "god": "" },
+    "sv4": { "rates": { "Special Illustration Rare": 47, "Hyper Rare": 82 }, "by": "TCGplayer", "box": true },
+    "sv5": { "rates": { "Double Rare": 6, "Illustration Rare": 13, "Ultra Rare": 15, "ACE SPEC Rare": 20, "Special Illustration Rare": 86, "Hyper Rare": 139 }, "by": "TCGplayer", "box": true },
+    "sv6": { "rates": { "Double Rare": 6, "Illustration Rare": 13, "Ultra Rare": 15, "ACE SPEC Rare": 20, "Special Illustration Rare": 86, "Hyper Rare": 146 }, "by": "TCGplayer", "box": true },
+    "sv6pt5": { "rates": { "Special Illustration Rare": 50 }, "by": "community", "est": true, "box": false },
+    "sv7": { "rates": { "Illustration Rare": 13, "Ultra Rare": 17, "Special Illustration Rare": 90, "Hyper Rare": 137 }, "by": "TCGplayer", "box": true },
+    "sv8": { "rates": { "Special Illustration Rare": 87, "Hyper Rare": 189 }, "by": "TCGplayer", "box": true },
+    "sv8pt5": { "rates": { "Special Illustration Rare": 45, "Hyper Rare": 180 }, "by": "TCGplayer", "box": false, "god": "" },
+    "zsv10pt5": { "rates": { "Illustration Rare": 6, "Ultra Rare": 16, "Special Illustration Rare": 80 }, "by": "TCGplayer", "box": false, "god": "" },
+    "rsv10pt5": { "rates": { "Illustration Rare": 6, "Ultra Rare": 16, "Special Illustration Rare": 80 }, "by": "TCGplayer", "box": false, "god": "" }
+  }
+}
