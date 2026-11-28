@@ -1,0 +1,35 @@
+{
+    "at":  "2026-11-28T08:40:10Z",
+    "lastOk":  "2026-11-28T08:40:10Z",
+    "status":  "nothing new",
+    "alerts":  [
+
+               ],
+    "en":  {
+               "changed":  false,
+               "addedCards":  0
+           },
+    "ja":  {
+               "changed":  false,
+               "addedCards":  0
+           },
+    "sources":  [
+                    {
+                        "name":  "English",
+                        "last":  "2026-11-22T04:28:41Z",
+                        "days":  6
+                    },
+                    {
+                        "name":  "Japanese",
+                        "last":  "2026-11-24T14:45:37Z",
+                        "days":  4
+                    }
+                ],
+    "backup":  {
+                   "at":  "2026-11-28T03:50:02.374Z",
+                   "ok":  true,
+                   "lastGood":  "2026-11-28T03:50:02.374Z",
+                   "copies":  1,
+                   "needsLook":  false
+               }
+}
